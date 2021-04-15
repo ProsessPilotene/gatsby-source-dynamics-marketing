@@ -10,6 +10,8 @@
 
 A simple source plugin, using standard dynamcis marketing apis, to allow Gatsby based sites create a marketing calendar.
 
+Please note; This plugin is in development, and is not production ready. Contributions and improvements are welcome.
+
 ## 🚀 Quick start
 
 To get started creating a new plugin, you can follow these steps:
