@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://www.prosesspilotene.no">
-    <img alt="ProsessPilotene" src="https://res.cloudinary.com/prosesspilotene/image/upload/v1587373586/logo/prosesspilotene/ProsessPiloteneLogoHorisontal.svg" width="60" />
+    <img alt="ProsessPilotene" src="https://res.cloudinary.com/prosesspilotene/image/upload/v1587373586/logo/prosesspilotene/ProsessPiloteneLogoHorisontal.svg" width="300" />
   </a>
 </p>
 
