@@ -1,15 +1,17 @@
-const fetch = require("node-fetch")
-const gql = require("graphql-tag")
+// const fetch = require("node-fetch")
+// const gql = require("graphql-tag")
 
-const { assertValidExecutionArguments } = require("graphql/execution/execute")
-const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
+// const { assertValidExecutionArguments } = require("graphql/execution/execute")
+// const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
 
-const axios = require("axios").default
+const { getEvents, getSessions, getSessionTrack } = require("./src/DynamicsMarketing.js")
 
-// TODO : få det til å virke
+// exports.onPreInit = (_) => {
+//   console.log(`Loaded gatsby-source-dynamics-marketing`)
+// }
 
-const pluginOptionsSchema = ({ Joi }) => {
-  Joi.object({
+const pluginOptionsSchema = ({ Joi }) =>
+  Joi.object().keys({
     apiKey: Joi.string().required().description(`Dynamics Marketing apiKey`).messages({
       // Override the error message if the .required() call fails
       "any.required": `"apiKey" needs to be defined. Get the correct value from dynamics marketing.`,
@@ -17,54 +19,11 @@ const pluginOptionsSchema = ({ Joi }) => {
     apiEndPoint: Joi.string().required().description(`Dynamics Marketing apiEndPoint`),
     Origin: Joi.string().required().description(`Origin`).messages({
       // Override the error message if the .required() call fails
-      "any.required": `"Origin" needs to be defined. Get the correct value from dynamics marketing.`,
+      "any.required": `"Origin" needs to be defined and identical to Dynamics Marketing`,
     }),
   })
-}
 
 exports.pluginOptionsSchema = pluginOptionsSchema
-
-exports.onPreInit = (_, pluginOptions) => {
-  console.log(`Loaded gatsby-source-dynamics-marketing`)
-}
-
-const getEvents = (apiEndPoint, apiKey, origin) => {
-  const eventEndPoint = apiEndPoint + "/EvtMgmt/api/v2.0/events/published?emApplicationtoken=" + apiKey
-  var config = {
-    method: "get",
-    url: eventEndPoint,
-    headers: {
-      Origin: origin,
-    },
-  }
-  return axios(config)
-}
-
-const getSessions = (apiEndPoint, apiKey, origin, readableEventId) => {
-  const sessionEndPoint =
-    apiEndPoint + "/EvtMgmt/api/v2.0/events/" + readableEventId + "/sessions/?emApplicationtoken=" + apiKey
-  var config = {
-    method: "get",
-    url: sessionEndPoint,
-    headers: {
-      Origin: origin,
-    },
-  }
-  return axios(config)
-}
-
-const getSessionTrack = (apiEndPoint, apiKey, origin, readableEventId) => {
-  const sessionTrackEndPoint =
-    apiEndPoint + "/EvtMgmt/api/v2.0/events/" + readableEventId + "/tracks/?emApplicationtoken=" + apiKey
-  var config = {
-    method: "get",
-    url: sessionTrackEndPoint,
-    headers: {
-      Origin: origin,
-    },
-  }
-  return axios(config)
-}
 
 // exports.createSchemaCustomization = ({ actions }) = {
 //   const { createTypes } = actions
@@ -84,13 +43,12 @@ exports.sourceNodes = async (
   { actions, createContentDigest, createNodeId, getNodesByType, reporter },
   pluginOptions
 ) => {
-  // TODO: egne funksjoner per modell
   const EVENT_NODE_TYPE = "DynamicsMarketingEvent"
   const SESSION_NODE_TYPE = "DynamicsMarketingSession"
   const SESSION_TRACK_NODE_TYPE = "DynamicsMarketingSessionTrack"
 
   getEvents(pluginOptions.apiEndPoint, pluginOptions.apiKey, pluginOptions.Origin).then(function (response) {
-    reporter.info("creating event node")
+    reporter.info("Creating " + getEvents.length + " Dynamics Marketing Event nodes")
     response.data.forEach((event) => {
       actions.createNode({
         ...event,
@@ -105,7 +63,7 @@ exports.sourceNodes = async (
       })
       getSessions(pluginOptions.apiEndPoint, pluginOptions.apiKey, pluginOptions.Origin, event.readableEventId).then(
         function (response) {
-          reporter.info("creating session node")
+          reporter.info("Creating " + getSessions.length + " Dynamics Marketing Session nodes")
           response.data.forEach((session) => {
             actions.createNode({
               ...session,
@@ -127,7 +85,7 @@ exports.sourceNodes = async (
         pluginOptions.Origin,
         event.readableEventId
       ).then(function (response) {
-        reporter.info("creating sessionTrack node")
+        reporter.info("Creating " + getSessions.length + " Dynamics Marketing SessionTrack nodes")
         response.data.forEach((track) => {
           actions.createNode({
             ...track,
