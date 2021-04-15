@@ -80,14 +80,17 @@ const getSessionTrack = (apiEndPoint, apiKey, origin, readableEventId) => {
 //   `)
 // }
 
-exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNodesByType }, pluginOptions) => {
+exports.sourceNodes = async (
+  { actions, createContentDigest, createNodeId, getNodesByType, reporter },
+  pluginOptions
+) => {
   // TODO: egne funksjoner per modell
   const EVENT_NODE_TYPE = "DynamicsMarketingEvent"
   const SESSION_NODE_TYPE = "DynamicsMarketingSession"
   const SESSION_TRACK_NODE_TYPE = "DynamicsMarketingSessionTrack"
 
   getEvents(pluginOptions.apiEndPoint, pluginOptions.apiKey, pluginOptions.Origin).then(function (response) {
-    console.log("creating event node")
+    reporter.info("creating event node")
     response.data.forEach((event) => {
       actions.createNode({
         ...event,
@@ -102,7 +105,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
       })
       getSessions(pluginOptions.apiEndPoint, pluginOptions.apiKey, pluginOptions.Origin, event.readableEventId).then(
         function (response) {
-          console.log("creating session node")
+          reporter.info("creating session node")
           response.data.forEach((session) => {
             actions.createNode({
               ...session,
@@ -124,7 +127,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
         pluginOptions.Origin,
         event.readableEventId
       ).then(function (response) {
-        console.log("creating sessionTrack node")
+        reporter.info("creating sessionTrack node")
         response.data.forEach((track) => {
           actions.createNode({
             ...track,
