@@ -1,0 +1,76 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "ignorePatterns": ["**/workers-site/**", "**/static/**"],
+  "extends": [
+    "plugin:react/recommended", // Uses the recommended rules from @eslint-plugin-react
+    "plugin:@typescript-eslint/eslint-recommended", // Uses the recommended rules from @typescript-eslint/eslint-plugin
+    "plugin:@typescript-eslint/recommended",
+    "standard",
+    // "plugin:promise/recommended",  // TODO Enable after react-query is added
+    "plugin:react-hooks/recommended",
+    // https://github.com/prettier/eslint-config-prettier/blob/main/CHANGELOG.md#version-800-2021-02-21
+    // "prettier/@typescript-eslint", // Uses eslint-config-prettier to disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
+    "plugin:prettier/recommended" // Enables eslint-plugin-prettier and displays prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
+    // "prettier" as of Version 8.0.0 (2021-02-21)
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true // Allows for the parsing of JSX
+    },
+    "ecmaVersion": 12, // Allows for the parsing of modern ECMAScript features
+    "sourceType": "module" // Allows for the use of imports
+  },
+  "plugins": ["react", "@typescript-eslint", "promise"],
+  "rules": {
+    "no-console": 1,
+    // note you must disable the base rule as it can report incorrect errors
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-unused-vars": ["off"],
+    "@typescript-eslint/no-var-requires": ["off"],
+    "@typescript-eslint/no-use-before-define": ["off"],
+    "@typescript-eslint/explicit-module-boundary-types": ["off"],
+    "react/jsx-uses-vars": "error",
+    "react/jsx-key": "warn",
+    "react/prop-types": "off", // We shall use TypeScript types instead of Props validation
+    "no-unused-vars": "warn",
+    "no-useless-escape": "warn",
+    "dot-notation": "warn",
+    "spaced-comment": "warn",
+    "react/jsx-uses-react": "off", // No longer needed after REACT 17
+    "react/react-in-jsx-scope": "off"
+    // "off" means 0 (turns the rule off completely)
+    // "warn" means 1 (turns the rule on but won't make the linter fail)
+    // "error" means 2 (turns the rule on and will make the linter fail)
+  },
+  "overrides": [
+    {
+      // enable the rule specifically for TypeScript files
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "no-console": 1,
+        "@typescript-eslint/no-unused-vars": ["off"], // Already covered by Javascript standards
+        "@typescript-eslint/no-var-requires": ["warn"],
+        "@typescript-eslint/no-use-before-define": ["warn"],
+        "@typescript-eslint/explicit-module-boundary-types": ["off"]
+      }
+    }
+  ],
+  "settings": {
+    "react": {
+      "createClass": "createReactClass", // Regex for Component Factory to use,
+      // default to "createReactClass"
+      "pragma": "React", // Pragma to use, default to "React"
+      "fragment": "Fragment", // Fragment to use (may be a property of <pragma>), default to "Fragment"
+      "version": "detect", // React version. "detect" automatically picks the version you have installed.
+      // You can also use `16.0`, `16.3`, etc, if you want to override the detected value.
+      // default to latest and warns if missing
+      // It will default to "detect" in the future
+      "flowVersion": "0.53" // Flow version
+    }
+  }
+}

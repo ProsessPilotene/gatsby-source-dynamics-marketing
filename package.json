@@ -1,0 +1,45 @@
+{
+  "name": "@prosesspilotene/gatsby-source-dynamics-marketing",
+  "version": "1.0.0-beta0.2",
+  "description": "A Gatsbyjs source plugin for Microsoft Dynamics 365 Marketing",
+  "main": "index.js",
+  "author": "Thea Aksnes Janvin <thea.a.janvin@prosesspilotene.no>",
+  "contributors": [
+    "Frode Stenstrøm <frode.stenstrom@prosesspilotene.no> (https://prosesspilotene.no/nb/prosesspiloter/frode-stenstrom)"
+  ],
+  "homepage": "https://prosesspilotene.no",
+  "url": "https://github.com/prosesspilotene/gatsby-source-dynamics-marketing",
+  "email": "support@prosesspilotene.no",
+  "license": "0BSD",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "echo \"No build script setup\"",
+    "publish": "npm publish"
+  },
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin",
+    "gatsby-source-plugin",
+    "dynamics-marketing"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "bugs": {
+    "url": "https://github.com/prosesspilotene/gatsby-source-dynamics-marketingissues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prosesspilotene/gatsby-source-dynamics-marketing.git"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "gatsby-source-filesystem": "^3.3.0",
+    "graphql": "^15.5.0",
+    "graphql-tag": "^2.11.0",
+    "node-fetch": "^2.6.1",
+    "subscriptions-transport-ws": "^0.9.18",
+    "ws": "^7.4.4"
+  },
+  "devDependencies": {}
+}
