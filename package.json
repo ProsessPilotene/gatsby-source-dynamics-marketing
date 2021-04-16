@@ -1,6 +1,6 @@
 {
   "name": "@prosesspilotene/gatsby-source-dynamics-marketing",
-  "version": "1.0.0-beta0.2",
+  "version": "1.0.0-beta0.3",
   "description": "A Gatsbyjs source plugin for Microsoft Dynamics 365 Marketing",
   "main": "index.js",
   "author": "Thea Aksnes Janvin <thea.a.janvin@prosesspilotene.no>",
