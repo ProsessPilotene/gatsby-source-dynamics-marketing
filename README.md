@@ -1,14 +1,12 @@
 <p align="center">
-  <a href="https://www.prosesspilotene.no">
-    <img alt="ProsessPilotene" src="https://res.cloudinary.com/prosesspilotene/image/upload/v1587373586/logo/prosesspilotene/ProsessPiloteneLogoHorisontal.svg" width="300" />
+  <a href="https://prosesspilotene.no">
+    <img alt="ProsessPilotene" src="https://res.cloudinary.com/prosesspilotene/image/upload/v1587373586/logo/prosesspilotene/ProsessPiloteneLogoHorisontal.svg" width="400" />
   </a>
 </p>
 
-<h1 align="center">
-  Gatsbyjs source plugin for Dynamics Marketing
-</h1>
+# Gatsbyjs source plugin for Dynamics Marketing
 
-A simple source plugin, using standard dynamcis marketing apis, to allow Gatsby based sites create a marketing calendar.
+A simple source plugin, using standard Microsoft Dynamics 365 Marketing APIs, to allow Gatsby based sites create a marketing calendar.
 
 Please note; This plugin is in development, and is not production ready. Contributions and improvements are welcome.
 
@@ -19,7 +17,7 @@ To get started creating a new plugin, you can follow these steps:
 1. Install the plugin to your existing Gatsby site `npm install`
 
 ```shell
-npm install gatsby-source-dynamics-marketing
+npm install @prosesspilotene/gatsby-source-dynamics-marketing
 ```
 
 1. Include the plugin in a Gatsby site
@@ -31,17 +29,20 @@ module.exports = {
   plugins: [
     // other gatsby plugins
     // ...
-    {
-      resolve: `gatsby-source-dynamics-marketing`,
+     {
+      resolve: `@prosesspilotene/gatsby-source-dynamics-marketing`,
       options: {
-        apiKey: "API Key as defined by Dynamics Markerint",
-        apiEndPoint: "API endpont something ike https://e0caasfsdfsdfadsf0edbc.svc.dynamics.com",
-        Origin: "http://localhost:8000",
+        apiKey: process.env.DYNAMICS_MARKETING_EVENT_APIKEY,
+        apiEndPoint: process.env.DYNAMICS_MARKETING_EVENT_ENDPOINT,
+        Origin: process.env.GATSBY_PUBLIC_URL,
       },
     },
   ],
 }
 ```
+
+Then create the environment variables for your API Key, EndPoint and origin
+
 
 1. Verify the plugin was added correctly
 
@@ -63,7 +64,6 @@ success onPreInit - 0.016s
 ## 🎓 Learning Microsoft Dynamics Marketing
 
 If you're looking for more guidance on how to use Dynamics Marketing, contact our support staff at support@prosesspilotene.no
-
 
 ## 🎓 Learning Gatsby
 
