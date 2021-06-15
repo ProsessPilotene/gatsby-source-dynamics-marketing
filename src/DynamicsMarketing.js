@@ -64,4 +64,26 @@ function getSessionTrack(apiEndPoint, apiKey, origin, readableEventId) {
   return axios(config)
 }
 
-module.exports = { getEvents, getSessions, getSessionTrack }
+/**
+ * Get all speakers
+ * @todo Add Loop through all events, and get all speakers pr event.
+ * @param {*} apiEndPoint
+ * @param {*} apiKey
+ * @param {*} origin
+ * @param {*} readableEventId
+ * @returns
+ */
+function getSpeakers(apiEndPoint, apiKey, origin, readableEventId) {
+  const speakersEndPoint =
+    apiEndPoint + "/EvtMgmt/api/v2.0/events/" + readableEventId + "/speakers/?emApplicationtoken=" + apiKey
+  var config = {
+    method: "get",
+    url: speakersEndPoint,
+    headers: {
+      Origin: origin,
+    },
+  }
+  return axios(config)
+}
+
+module.exports = { getEvents, getSessions, getSessionTrack, getSpeakers }
